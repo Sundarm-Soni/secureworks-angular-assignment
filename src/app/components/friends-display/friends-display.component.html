@@ -1,2 +1,6 @@
-<p>Display works</p>
-{{ store.allfriends() | json }}
+<div class="table-container">
+  <h2>Friends Table</h2>
+  <secureworks-friends-table
+    [rowData]="this.friendsDataTable()"
+  ></secureworks-friends-table>
+</div>

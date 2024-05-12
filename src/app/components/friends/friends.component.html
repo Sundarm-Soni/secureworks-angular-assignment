@@ -6,19 +6,18 @@
       color="primary"
       label="Add your friend"
       (click)="addYourFriend($event)">Add friend</button>
-      <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
 	</section>
 
-	<form [formGroup]="_form">
+	<form [formGroup]="friendForm">
     <ng-container formArrayName="groups">
-      <ng-container *ngFor="let group of _groupsFormArray?.controls; index as i">
-        <secureworks-friend-group (remove)="_delete(i)"
+      <ng-container *ngFor="let group of groupsFormArray?.controls; index as i">
+        <secureworks-friend-group (remove)="deleteFriendGroup(i)"
                             [formControlName]="i"
                             >
         </secureworks-friend-group>
       </ng-container>
     </ng-container>
 	</form>
+  <button mat-raised-button color="primary" *ngIf="groupsFormArray.length" (click)="submitForm()">Submit</button>
 </div>
-<br>
-<br>
+

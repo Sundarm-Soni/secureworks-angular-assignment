@@ -9,24 +9,49 @@
           type="text"
           placeholder="Enter your name"
         />
+        <mat-error *ngIf="friendsForm.get('name')?.hasError('required')">{{
+          "Name is required!!"
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Age:</mat-label>
         <input
           matInput
           formControlName="age"
-          type="string"
+          type="number"
+          inputmode="numeric"
           placeholder="Enter your age"
         />
+        <mat-error
+          *ngIf="
+            friendsForm.get('age')?.hasError('min') &&
+            friendsForm.get('age')?.hasError('max')
+          "
+          >{{ "Please enter age between 10 and 120 years" }}</mat-error
+        >
+        <mat-error *ngIf="friendsForm.get('age')?.hasError('required')">{{
+          "Age is required!!"
+        }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Weight:</mat-label>
         <input
           matInput
-          type="string"
+          type="number"
+          inputmode="numeric"
           formControlName="weight"
           placeholder="Enter your weight"
         />
+        <mat-error
+          *ngIf="
+            friendsForm.get('weight')?.hasError('min') &&
+            friendsForm.get('weight')?.hasError('max')
+          "
+          >{{ "Please enter weight between 30 and 150 kg" }}</mat-error
+        >
+        <mat-error *ngIf="friendsForm.get('weight')?.hasError('required')">{{
+          "Weight is required!!"
+        }}</mat-error>
       </mat-form-field>
     </div>
   </form>

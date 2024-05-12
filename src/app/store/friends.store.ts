@@ -4,7 +4,7 @@ import { FriendsService } from "../services/friends.service";
 import { inject } from "@angular/core";
 
 const initialState: IFriendsState = {
-  allfriends: [],
+  allfriends: { friends: {name: '', age: null, weight: null}, groups: [] },
   loading: false,
   error: false
 }
@@ -21,7 +21,7 @@ export const FriendsStore = signalStore(
 
         const allfriends = await friendsService.getFriends();
 
-        patchState(store, { allfriends, loading: false })
+        patchState(store, { allfriends, loading: false, error: false })
       }
     })
   )

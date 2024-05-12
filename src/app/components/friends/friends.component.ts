@@ -1,48 +1,69 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FormGroupComponent } from '../friend-group/friend-group.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { FriendsService } from '../../services/friends.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [FormGroupComponent, ReactiveFormsModule, MatButtonModule, FormsModule, CommonModule],
+  imports: [
+    FormGroupComponent,
+    ReactiveFormsModule,
+    MatButtonModule,
+    FormsModule,
+    CommonModule,
+  ],
   selector: 'secureworks-friends',
   templateUrl: './friends.component.html',
   styleUrl: './friends.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FriendsComponent {
-  public _form!: FormGroup;
+  public friendForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this._createForm();
+  constructor(
+    private fb: FormBuilder,
+    private _friendsService: FriendsService,
+    private _router: Router
+  ) {
+    this._createFriendForm();
   }
 
   public addYourFriend(event: Event): void {
     event.stopPropagation();
-    this._groupsFormArray.push(
+    this.groupsFormArray.push(
       this.fb.control({
-        groups: []
+        groups: [],
       })
     );
   }
 
- public _delete(index: number) {
-    this._groupsFormArray.removeAt(index);
+  public deleteFriendGroup(index: number): void {
+    this.groupsFormArray.removeAt(index);
   }
 
-  get _groupsFormArray(): FormArray {
-    return this._form.get("groups") as FormArray;
+  public get groupsFormArray(): FormArray {
+    return this.friendForm.get('groups') as FormArray;
   }
 
   public submitForm(): void {
-    console.log(this._form.value);
+    this._friendsService.setfriendsData(this.friendForm.value);
+    this._router.navigate(['friends-display']);
   }
 
-  private _createForm() {
-    this._form = this.fb.group({
-      groups: this.fb.array([])
+  private _createFriendForm(): void {
+    this.friendForm = this.fb.group({
+      groups: this.fb.array([]),
     });
   }
 }

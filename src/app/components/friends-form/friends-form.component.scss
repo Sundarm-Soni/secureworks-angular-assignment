@@ -1,50 +1,63 @@
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
 :host {
-    button {
-      width: 80px;
-      height: 50px;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
+  button {
+    width: toRem(80px);
+    height: toRem(50px);
+    margin-left: toRem(10px);
+    margin-right: toRem(10px);
+  }
 
-    mat-label {
-      color: black;
-    }
+  mat-label {
+    color: black;
+  }
 
-    form {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(20);
+    align-items: flex-end;
+
+    > div {
       display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: flex-end;
-
-      > div {
-        display: flex;
-        gap: 40px;
-      }
+      gap: toRem(40);
     }
+  }
 
-    mat-form-field {
-      display: flex;
-      flex-direction: column;
-      justify-self: center;
-      align-items: center;
-    }
+  mat-form-field {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  }
 
-    input {
-      font-size: 18px;
-      width: 100%;
-    }
+  input {
+    font-size: toRem(18);
+    width: 100%;
 
-    .form-container {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      justify-content: center;
-      align-items: center;
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
     }
+  }
 
-    .add-friends{
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-friends {
+    display: flex;
+    flex-direction: column;
+    gap: toRem(40);
+  }
 }

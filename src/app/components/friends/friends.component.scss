@@ -1,3 +1,7 @@
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
 :host {
     .container {
       text-align: center;
@@ -5,11 +9,14 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
     }
 
     .top-bar {
       display: flex;
-      gap: 20px;
+      gap: toRem(20);
+    }
+
+    form {
+      margin-bottom: toRem(16);
     }
 }

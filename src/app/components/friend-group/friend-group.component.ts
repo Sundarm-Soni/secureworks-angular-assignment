@@ -5,8 +5,7 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
-  OnInit,
-  ChangeDetectorRef,
+  OnInit
 } from '@angular/core';
 import {
   FormGroup,
@@ -61,7 +60,7 @@ export class FormGroupComponent
 
   private _destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private _fb: FormBuilder, private _cdRef: ChangeDetectorRef) {}
+  constructor(private _fb: FormBuilder) {}
 
   ngOnInit() {
     this.friendGroup = this._createFormGroup();
@@ -94,7 +93,7 @@ export class FormGroupComponent
   public addFriendGroup(): void {
     this._groupsFormArray.push(
       this._fb.control({
-        friends: { name: '', age: '', weight: '' },
+        friends: { name: '', age: null, weight: null },
         groups: [],
       })
     );
@@ -108,25 +107,24 @@ export class FormGroupComponent
     return this._fb.group({
       friends: this._fb.group({
         name: new FormControl('', [Validators.required]),
-        age: new FormControl(null, [Validators.required]),
-        weight: new FormControl(null, [Validators.required]),
+        age: new FormControl(null, [Validators.required, Validators.min(10), Validators.max(150)]),
+        weight: new FormControl(null, [Validators.required, Validators.min(30), Validators.max(200)]),
       }),
       groups: this._fb.array([]),
     });
   }
 
-  private _setupFormControlValues() {
+  private _setupFormControlValues(): void {
     this.friendGroup.valueChanges
       .pipe(takeUntil(this._destroy$))
       .subscribe((value) => {
         if (this._onChange) {
-          console.log(value);
           this._onChange(value);
         }
       });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     if (this._destroy$ && !this._destroy$.closed) {
       this._destroy$.next();
       this._destroy$.complete();
