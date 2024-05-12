@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { FriendsComponent } from './components/friends/friends.component';
+import { FriendsDisplayComponent } from './components/friends-display/friends-display.component';
+import { NavigationComponent } from './shared/Layouts/navigation/navigation.component';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [
+    RouterModule,
+    FriendsComponent,
+    FriendsDisplayComponent,
+    NavigationComponent,
+  ],
+  selector: 'secureworks-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'secureworks-angular-assignment';
-}
+export class AppComponent {}

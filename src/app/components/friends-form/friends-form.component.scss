@@ -1,0 +1,50 @@
+:host {
+    button {
+      width: 80px;
+      height: 50px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    mat-label {
+      color: black;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-end;
+
+      > div {
+        display: flex;
+        gap: 40px;
+      }
+    }
+
+    mat-form-field {
+      display: flex;
+      flex-direction: column;
+      justify-self: center;
+      align-items: center;
+    }
+
+    input {
+      font-size: 18px;
+      width: 100%;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .add-friends{
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+}

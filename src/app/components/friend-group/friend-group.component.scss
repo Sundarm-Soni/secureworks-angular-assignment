@@ -1,0 +1,17 @@
+:host {
+
+  fieldset {
+    padding: 20px;
+
+    &:first-of-type {
+      max-width: 200px;
+    }
+  }
+
+  fieldset > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
