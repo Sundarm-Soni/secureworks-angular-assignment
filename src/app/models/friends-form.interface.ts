@@ -21,3 +21,9 @@ export interface IFriendsGroupForm {
   friends: FormGroup<IFriendsForm>,
   groups?: any
 }
+
+export interface IFriendsState {
+  allfriends: IFriendsGroupData[],
+  loading: boolean,
+  error: boolean
+}

@@ -1,9 +1,5 @@
 const friendsMock = [
     {
-      "name": "Ramesh",
-      "id": 123,
-      "age": 40,
-      "weight": 70,
       "friends": [
         {
           "name": "Monika",
@@ -90,4 +86,3 @@ const friendsMock = [
       ]
     }
   ]
-  

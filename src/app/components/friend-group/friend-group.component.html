@@ -18,8 +18,8 @@
         <secureworks-friend-group
           *ngFor="let s of _groupsFormArray?.controls; index as i"
           (remove)="deleteFriendGroupFromArray(i)"
-          [formGroupName]="i"
-          [formLabel]="'Friend of'+ (s.get('name')?.value) + (i + 1) + ':'"
+          [formControlName]="i"
+          [formLabel]="'Friend of '+ (s.get('name')?.value) + ':'"
         >
         </secureworks-friend-group>
       </ng-container>

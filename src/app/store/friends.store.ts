@@ -1,0 +1,28 @@
+import { patchState, signalStore, withMethods, withState } from "@ngrx/signals";
+import { IFriendsState } from "../models/friends-form.interface";
+import { FriendsService } from "../services/friends.service";
+import { inject } from "@angular/core";
+
+const initialState: IFriendsState = {
+  allfriends: [],
+  loading: false,
+  error: false
+}
+
+export const FriendsStore = signalStore(
+  {providedIn: 'root'},
+  withState(initialState),
+  withMethods(
+    (store, friendsService = inject(FriendsService)) => ({
+      async loadAll() {
+        patchState(store, {
+          loading: true
+        });
+
+        const allfriends = await friendsService.getFriends();
+
+        patchState(store, { allfriends, loading: false })
+      }
+    })
+  )
+);

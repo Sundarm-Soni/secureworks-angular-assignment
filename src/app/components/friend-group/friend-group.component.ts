@@ -21,11 +21,7 @@ import {
 } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {
-  IFriendsForm,
-  IFriendsFormData,
-  IFriendsGroupData,
-} from '../../models/friends-form.interface';
+import { IFriendsGroupData } from '../../models/friends-form.interface';
 import { AddFriendButtonsComponent } from '../add-friend-buttons/add-friend-buttons.component';
 import { FriendsFormComponent } from '../friends-form/friends-form.component';
 import { CommonModule } from '@angular/common';
@@ -68,7 +64,7 @@ export class FormGroupComponent
   constructor(private _fb: FormBuilder, private _cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this._createFormGroup();
+    this.friendGroup = this._createFormGroup();
 
     this._setupFormControlValues();
   }
@@ -87,15 +83,9 @@ export class FormGroupComponent
     this._onChange = fn;
   }
 
-  public registerOnTouched(fn: any): void {
-    // TODO: implement this method
-    // throw new Error('registerOnTouched not implemented');
-  }
+  public registerOnTouched(fn: any): void {}
 
-  public setDisabledState(isDisabled: boolean): void {
-    // TODO: implement this method
-    // throw new Error('setDisabledState not implemented');
-  }
+  public setDisabledState(isDisabled: boolean): void {}
 
   public deleteFriendGroupFromArray(index: number) {
     this._groupsFormArray.removeAt(index);
@@ -103,9 +93,11 @@ export class FormGroupComponent
 
   public addFriendGroup(): void {
     this._groupsFormArray.push(
-        this._createFormGroup()
+      this._fb.control({
+        friends: { name: '', age: '', weight: '' },
+        groups: [],
+      })
     );
-    this._cdRef.detectChanges();
   }
 
   get _groupsFormArray(): FormArray {
@@ -113,7 +105,7 @@ export class FormGroupComponent
   }
 
   private _createFormGroup(): FormGroup<any> {
-    this.friendGroup = this._fb.group({
+    return this._fb.group({
       friends: this._fb.group({
         name: new FormControl('', [Validators.required]),
         age: new FormControl(null, [Validators.required]),
@@ -121,7 +113,6 @@ export class FormGroupComponent
       }),
       groups: this._fb.array([]),
     });
-    return this.friendGroup;
   }
 
   private _setupFormControlValues() {

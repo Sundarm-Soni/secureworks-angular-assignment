@@ -1,5 +1,15 @@
 :host {
     .container {
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .top-bar {
+      display: flex;
+      gap: 20px;
     }
 }

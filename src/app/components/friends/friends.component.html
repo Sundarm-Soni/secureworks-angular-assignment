@@ -1,11 +1,12 @@
-<div>
+<div class="container">
 	<section class="top-bar">
-		<h3>Start adding your friends</h3>
+		<h3>Start adding your friends:</h3>
 		<button type="button"
       mat-raised-button
       color="primary"
       label="Add your friend"
       (click)="addYourFriend($event)">Add friend</button>
+      <button mat-raised-button color="primary" (click)="submitForm()">Submit</button>
 	</section>
 
 	<form [formGroup]="_form">
@@ -19,6 +20,5 @@
     </ng-container>
 	</form>
 </div>
-<button mat-raised-button color="primary" *ngIf="_form.value" (click)="submitForm()">Submit</button>
 <br>
 <br>
