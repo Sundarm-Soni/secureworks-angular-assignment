@@ -25,32 +25,35 @@ import {
 export class FriendsDisplayComponent implements OnInit {
   public _store = inject(FriendsStore);
   public friendsDataTable = signal<IAgGridFriendsInterface[]>([]);
+  private _prevVal!: string;
+  private _currVal!: string;
 
   public ngOnInit(): void {
     this.loadFriends().then(() => {
-      if(this._store.allfriends()) {
+      if (this._store.allfriends()) {
         this.transformData(this._store.allfriends());
       }
     });
   }
-  prevVal: any;
+
   public transformData(data: IFriendsGroupData): void {
     for (let value of Object.values(data)) {
       if (Array.isArray(value)) {
+        this._currVal = this._prevVal;
         for (let val of value) {
           this.transformData(val);
         }
       } else {
         this.friendsDataTable.update((values: IAgGridFriendsInterface[]) => {
-          const finalObj = {...value, friend: this.prevVal}
-          this.prevVal = value.name;
+          const finalObj = { ...value, friend: this._currVal };
+          this._prevVal = value.name;
           return [...values, finalObj];
         });
       }
     }
   }
 
-  async loadFriends() {
+  async loadFriends(): Promise<void> {
     await this._store.loadAll();
   }
 }
