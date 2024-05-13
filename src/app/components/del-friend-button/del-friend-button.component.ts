@@ -12,15 +12,17 @@ import { GridApi, ICellRendererParams } from '@ag-grid-community/core';
 })
 export class DelFriendButtonComponent implements ICellRendererAngularComp {
   private _cellValue: any;
-  private _parentComponentontext: any;
   public deleteRow = output<string>();
   agInit(params: ICellRendererParams): void {
-    this._cellValue = params.data;
+    this._cellValue = params;
   }
   refresh(params: ICellRendererParams): boolean {
     return true;
   }
   deleteFriend(event: Event): void {
     event.stopPropagation();
+      this._cellValue.api.applyTransaction({
+        remove: [this._cellValue.node.data]
+      });
   }
 }

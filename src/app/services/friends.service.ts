@@ -22,6 +22,10 @@ export class FriendsService {
     return this.friendsData;
   }
 
+  public async deleteFriend(id: string) {
+    await this.sleep(500);
+  }
+
   public async sleep(ms: number) {
     return new Promise(resolve =>
       setTimeout(resolve, ms));

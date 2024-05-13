@@ -30,5 +30,12 @@ export const FriendsStore = signalStore(
 
       patchState(store, { allfriends, loading: false, error: false });
     },
+    // async deleteFriend(id: string) {
+    //   await friendsService.deleteFriend(id);
+
+    //   patchState(store, (state) => {
+    //     friends: state.allfriends.groups.filter(friend => friend.id !== id)
+    //   });
+    // }
   }))
 );

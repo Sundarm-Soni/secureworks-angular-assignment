@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
@@ -16,7 +12,7 @@ export class FriendChartComponent implements OnInit {
   @Input() public data: any;
   private _svg!: any;
   private _margin = 50;
-  private _weight = 1000 - this._margin * 2;
+  private _weight = 700 - this._margin * 2;
   private _height = 600 - this._margin * 2;
 
   ngOnInit(): void {
@@ -28,10 +24,13 @@ export class FriendChartComponent implements OnInit {
     this._svg = d3
       .select('figure#scatter')
       .append('svg')
-      .attr('weight', this._weight + this._margin * 2)
+      .attr('width', this._weight + this._margin * 2)
       .attr('height', this._height + this._margin * 2)
       .append('g')
-      .attr('transform', 'translate(' + this._margin + ',' + this._margin + ')');
+      .attr(
+        'transform',
+        'translate(' + this._margin + ',' + this._margin + ')'
+      );
   }
 
   private _drawPlot(): void {
