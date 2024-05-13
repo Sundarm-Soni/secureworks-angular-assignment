@@ -53,7 +53,7 @@ export class FriendsDisplayComponent implements OnInit {
         }
       } else {
         this.friendsDataTable.update((values: IAgGridFriendsInterface[]) => {
-          const finalObj = { ...value, age: `${value.age} years`, weight: `${value.weight} Kg`,  friend: this._currVal };
+          const finalObj = { ...value, id: Math.random().toString(36).substring(2,9),  friend: this._currVal };
           this._prevVal = value.name;
           return [...values, finalObj];
         });

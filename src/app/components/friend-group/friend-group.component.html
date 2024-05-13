@@ -15,7 +15,7 @@
       </secureworks-friends-form>
 
       <ng-container formArrayName="groups">
-        @for (s of _groupsFormArray?.controls; track s; let i = $index) {
+        @for (s of _groupsFormArray.controls; track s; let i = $index) {
           <secureworks-friend-group
             (remove)="deleteFriendGroupFromArray(i)"
             [formControlName]="i"
