@@ -13,8 +13,19 @@ export class FriendsService {
     this._friendData.set(data);
   }
 
+  public set friendsDataToSessionStorage(data: IFriendsGroupData) {
+    sessionStorage.setItem(
+      'friendsState',
+      JSON.stringify(data)
+    );
+  }
+
   public get friendsData() {
     return this._friendData();
+  }
+
+  public get friendsSessionStorage() {
+    return sessionStorage.getItem("friendsState");
   }
 
   public async getFriends(): Promise<IFriendsGroupData> {

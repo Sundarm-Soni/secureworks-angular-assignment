@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -16,11 +16,7 @@ import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [
-    FriendGroupComponent,
-    ReactiveFormsModule,
-    MatButtonModule
-],
+  imports: [FriendGroupComponent, ReactiveFormsModule, MatButtonModule],
   selector: 'secureworks-friends',
   templateUrl: './friends.component.html',
   styleUrl: './friends.component.scss',
@@ -56,6 +52,7 @@ export class FriendsComponent {
 
   public submitForm(): void {
     this._friendsService.friendsData = this.friendForm.value;
+    this._friendsService.friendsDataToSessionStorage = this.friendForm.value;
     this._router.navigate(['friends-display']);
   }
 

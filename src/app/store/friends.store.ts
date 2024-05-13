@@ -18,7 +18,10 @@ export const FriendsStore = signalStore(
         loading: true,
       });
 
-      const allfriends = await friendsService
+      if(friendsService.friendsSessionStorage) {
+        patchState(store, { allfriends: JSON.parse(friendsService.friendsSessionStorage), loading: false, error: false });
+      } else {
+        const allfriends = await friendsService
         .getFriends()
         .catch((err) => {
           if (err) {
@@ -29,6 +32,7 @@ export const FriendsStore = signalStore(
         }) as IFriendsGroupData;
 
       patchState(store, { allfriends, loading: false, error: false });
+      }
     },
     // async deleteFriend(id: string) {
     //   await friendsService.deleteFriend(id);
