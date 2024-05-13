@@ -1,6 +1,10 @@
 <div class="table-container">
   <h2>Friends Table</h2>
-  <secureworks-friends-table
-    [rowData]="this.friendsDataTable()"
+  @if(!store.loading()) {
+    <secureworks-friends-table
+    [rowData]="friendsDataTable()"
   ></secureworks-friends-table>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
 </div>

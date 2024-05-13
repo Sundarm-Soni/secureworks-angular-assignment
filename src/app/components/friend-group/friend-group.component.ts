@@ -2,10 +2,9 @@ import {
   Component,
   Input,
   forwardRef,
-  Output,
-  EventEmitter,
   OnDestroy,
-  OnInit
+  OnInit,
+  output
 } from '@angular/core';
 import {
   FormGroup,
@@ -40,19 +39,18 @@ import { CommonModule } from '@angular/common';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormGroupComponent),
+      useExisting: forwardRef(() => FriendGroupComponent),
       multi: true,
     },
   ],
 })
-export class FormGroupComponent
+export class FriendGroupComponent
   implements ControlValueAccessor, OnDestroy, OnInit
 {
   @Input()
   formLabel: string | number = 'Friend';
 
-  @Output()
-  remove: EventEmitter<void> = new EventEmitter<void>();
+  public remove = output<void>();
 
   public friendGroup!: FormGroup;
 

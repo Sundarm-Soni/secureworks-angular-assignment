@@ -1,13 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, KeyValueDiffers, OnDestroy, OnInit, Output, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, KeyValueDiffers, OnDestroy, OnInit, forwardRef, output } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormBuilder,
-  FormControl,
   FormGroup,
-  FormsModule,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +16,6 @@ import { Subject, takeUntil } from 'rxjs';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -42,13 +37,13 @@ export class FriendsFormComponent implements ControlValueAccessor, OnDestroy, On
   @Input() public myfriendsForm!: FormGroup<IFriendsGroupForm>;
   public friendsForm!: FormGroup<IFriendsForm>;
   private _destroy$: Subject<void> = new Subject<void>();
-  @Output() public remove: EventEmitter<void> = new EventEmitter<void>();
+  public remove = output<void>();
 
   private _onChange!: (
     value: IFriendsFormData
   ) => void;
 
-  constructor(private _fb: FormBuilder) {}
+  constructor() {}
 
   public ngOnInit(): void {
    this._createFriendsForm();

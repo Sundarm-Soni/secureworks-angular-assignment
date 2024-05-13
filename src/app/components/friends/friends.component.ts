@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FormGroupComponent } from '../friend-group/friend-group.component';
+import { FriendGroupComponent } from '../friend-group/friend-group.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { FriendsService } from '../../services/friends.service';
@@ -17,10 +17,9 @@ import { Router } from '@angular/router';
 @Component({
   standalone: true,
   imports: [
-    FormGroupComponent,
+    FriendGroupComponent,
     ReactiveFormsModule,
     MatButtonModule,
-    FormsModule,
     CommonModule,
   ],
   selector: 'secureworks-friends',

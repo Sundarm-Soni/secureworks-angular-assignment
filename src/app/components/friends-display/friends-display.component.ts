@@ -13,25 +13,31 @@ import {
   IAgGridFriendsInterface,
   IFriendsGroupData,
 } from '../../models/friends-form.interface';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
-  imports: [ReactiveFormsModule, JsonPipe, FriendsTableComponent],
+  imports: [
+    ReactiveFormsModule,
+    JsonPipe,
+    FriendsTableComponent,
+    MatProgressSpinnerModule
+  ],
   selector: 'secureworks-friends-display',
   templateUrl: './friends-display.component.html',
   styleUrl: './friends-display.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FriendsDisplayComponent implements OnInit {
-  public _store = inject(FriendsStore);
+  public store = inject(FriendsStore);
   public friendsDataTable = signal<IAgGridFriendsInterface[]>([]);
   private _prevVal!: string;
   private _currVal!: string;
 
   public ngOnInit(): void {
     this.loadFriends().then(() => {
-      if (this._store.allfriends()) {
-        this.transformData(this._store.allfriends());
+      if (this.store.allfriends()) {
+        this.transformData(this.store.allfriends());
       }
     });
   }
@@ -45,7 +51,7 @@ export class FriendsDisplayComponent implements OnInit {
         }
       } else {
         this.friendsDataTable.update((values: IAgGridFriendsInterface[]) => {
-          const finalObj = { ...value, friend: this._currVal };
+          const finalObj = { ...value, age: `${value.age} years`, weight: `${value.weight} Kg`,  friend: this._currVal };
           this._prevVal = value.name;
           return [...values, finalObj];
         });
@@ -54,6 +60,6 @@ export class FriendsDisplayComponent implements OnInit {
   }
 
   async loadFriends(): Promise<void> {
-    await this._store.loadAll();
+    await this.store.loadAll();
   }
 }

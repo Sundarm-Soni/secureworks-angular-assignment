@@ -8,10 +8,10 @@ describe('FriendsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FriendsTableComponent]
+      declarations: [FriendsTableComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(FriendsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
