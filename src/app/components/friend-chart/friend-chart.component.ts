@@ -34,6 +34,20 @@ export class FriendChartComponent implements OnInit {
   }
 
   private _drawPlot(): void {
+     // Add X axis label:
+  this._svg.append("text")
+  .attr("text-anchor", "end")
+  .attr("x", this._weight/2 + 10)
+  .attr("y", this._height + 10 + 20)
+  .text("Sepal Length");
+
+// Y axis label:
+this._svg.append("text")
+  .attr("text-anchor", "end")
+  .attr("transform", "rotate(-90)")
+  .attr("y", -30)
+  .attr("x", 10 - this._height/2 + 30)
+  .text("Petal Length")
     // Add X axis
     const x = d3.scaleLinear().domain([0, 200]).range([0, this._weight]);
     this._svg
