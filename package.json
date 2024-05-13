@@ -10,7 +10,9 @@
   },
   "jest": {
     "preset": "jest-preset-angular",
-    "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-jest.ts"
+    ],
     "globalSetup": "jest-preset-angular/global-setup"
   },
   "private": true,
@@ -27,6 +29,7 @@
     "@angular/router": "^17.0.0",
     "@ngrx/signals": "^17.2.0",
     "ag-grid-angular": "^31.3.1",
+    "d3": "^7.9.0",
     "ng-mocks": "^14.12.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
