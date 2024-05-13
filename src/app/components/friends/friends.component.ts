@@ -56,7 +56,7 @@ export class FriendsComponent {
   }
 
   public submitForm(): void {
-    this._friendsService.setfriendsData(this.friendForm.value);
+    this._friendsService.friendsData = this.friendForm.value;
     this._router.navigate(['friends-display']);
   }
 

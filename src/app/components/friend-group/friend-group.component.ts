@@ -1,10 +1,10 @@
 import {
   Component,
-  Input,
   forwardRef,
   OnDestroy,
   OnInit,
-  output
+  output,
+  input
 } from '@angular/core';
 import {
   FormGroup,
@@ -47,8 +47,8 @@ import { CommonModule } from '@angular/common';
 export class FriendGroupComponent
   implements ControlValueAccessor, OnDestroy, OnInit
 {
-  @Input()
-  formLabel: string | number = 'Friend';
+
+ public formLabel = input<string | number>('Friend');
 
   public remove = output<void>();
 

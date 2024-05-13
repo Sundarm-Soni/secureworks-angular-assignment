@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { IFriendsGroupData } from '../models/friends-form.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FriendsService {
-  friendsData: any;
+  private _friendData = signal<IFriendsGroupData>({} as IFriendsGroupData);
 
   constructor() { }
 
-  public setfriendsData(data: any): void {
-    this.friendsData = data;
+  public set friendsData(data: IFriendsGroupData) {
+    this._friendData.set(data);
   }
 
-  public async getFriends() {
+  public get friendsData() {
+    return this._friendData();
+  }
+
+  public async getFriends(): Promise<IFriendsGroupData> {
     await this.sleep(1000);
     return this.friendsData;
   }

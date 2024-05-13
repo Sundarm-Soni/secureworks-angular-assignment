@@ -1,6 +1,6 @@
 <form [formGroup]="friendGroup">
   <fieldset>
-    <legend>{{ formLabel }}</legend>
+    <legend>{{ formLabel() }}</legend>
     <div>
       <secureworks-add-friend-buttons
         (removeFriend)="remove.emit()"

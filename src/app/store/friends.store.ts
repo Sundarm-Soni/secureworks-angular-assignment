@@ -1,5 +1,5 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { IFriendsState } from '../models/friends-form.interface';
+import { IFriendsGroupData, IFriendsState } from '../models/friends-form.interface';
 import { FriendsService } from '../services/friends.service';
 import { inject } from '@angular/core';
 
@@ -26,7 +26,7 @@ export const FriendsStore = signalStore(
               error: true,
             });
           }
-        });
+        }) as IFriendsGroupData;
 
       patchState(store, { allfriends, loading: false, error: false });
     },
