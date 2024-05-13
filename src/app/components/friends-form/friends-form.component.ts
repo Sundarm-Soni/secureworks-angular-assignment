@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { IFriendsForm, IFriendsFormData, IFriendsGroupForm } from '../../models/friends-form.interface';
-import { CommonModule } from '@angular/common';
+
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -18,9 +18,8 @@ import { Subject, takeUntil } from 'rxjs';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-    CommonModule
-  ],
+    MatButtonModule
+],
   selector: 'secureworks-friends-form',
   templateUrl: './friends-form.component.html',
   styleUrl: './friends-form.component.scss',

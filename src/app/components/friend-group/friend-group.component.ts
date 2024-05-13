@@ -22,7 +22,7 @@ import { takeUntil } from 'rxjs/operators';
 import { IFriendsGroupData } from '../../models/friends-form.interface';
 import { AddFriendButtonsComponent } from '../add-friend-buttons/add-friend-buttons.component';
 import { FriendsFormComponent } from '../friends-form/friends-form.component';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'secureworks-friend-group',
@@ -33,9 +33,8 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule,
     AddFriendButtonsComponent,
-    FriendsFormComponent,
-    CommonModule,
-  ],
+    FriendsFormComponent
+],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

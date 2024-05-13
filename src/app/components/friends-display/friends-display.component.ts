@@ -14,6 +14,7 @@ import {
   IFriendsGroupData,
 } from '../../models/friends-form.interface';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { FriendChartComponent } from '../friend-chart/friend-chart.component';
 
 @Component({
   standalone: true,
@@ -21,7 +22,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     JsonPipe,
     FriendsTableComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FriendChartComponent
   ],
   selector: 'secureworks-friends-display',
   templateUrl: './friends-display.component.html',

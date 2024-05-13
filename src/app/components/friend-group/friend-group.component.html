@@ -5,23 +5,24 @@
       <secureworks-add-friend-buttons
         (removeFriend)="remove.emit()"
         (addFriend)="addFriendGroup()"
-      >
+        >
       </secureworks-add-friend-buttons>
 
-        <secureworks-friends-form
+      <secureworks-friends-form
         formGroupName="friends"
         [myfriendsForm] = "friendGroup"
         >
-        </secureworks-friends-form>
+      </secureworks-friends-form>
 
       <ng-container formArrayName="groups">
-        <secureworks-friend-group
-          *ngFor="let s of _groupsFormArray?.controls; index as i"
-          (remove)="deleteFriendGroupFromArray(i)"
-          [formControlName]="i"
-          [formLabel]="'Friend ' + (i)+':'"
-        >
-        </secureworks-friend-group>
+        @for (s of _groupsFormArray?.controls; track s; let i = $index) {
+          <secureworks-friend-group
+            (remove)="deleteFriendGroupFromArray(i)"
+            [formControlName]="i"
+            [formLabel]="'Friend ' + (i)+':'"
+            >
+          </secureworks-friend-group>
+        }
       </ng-container>
     </div>
   </fieldset>

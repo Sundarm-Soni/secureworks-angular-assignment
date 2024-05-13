@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FriendGroupComponent } from '../friend-group/friend-group.component';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { FriendsService } from '../../services/friends.service';
 import { Router } from '@angular/router';
@@ -19,9 +19,8 @@ import { Router } from '@angular/router';
   imports: [
     FriendGroupComponent,
     ReactiveFormsModule,
-    MatButtonModule,
-    CommonModule,
-  ],
+    MatButtonModule
+],
   selector: 'secureworks-friends',
   templateUrl: './friends.component.html',
   styleUrl: './friends.component.scss',
