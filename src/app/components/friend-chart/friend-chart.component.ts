@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import * as d3 from 'd3';
+import { IAgGridFriendsInterface } from '../../models/friends-form.interface';
 
 @Component({
   selector: 'secureworks-friend-chart',
@@ -9,7 +10,7 @@ import * as d3 from 'd3';
   styleUrl: './friend-chart.component.scss',
 })
 export class FriendChartComponent implements OnInit {
-  @Input() public data: any;
+  public data = input<IAgGridFriendsInterface[]>();
   private _svg!: any;
   private _margin = 50;
   private _weight = 700 - this._margin * 2;
@@ -18,6 +19,7 @@ export class FriendChartComponent implements OnInit {
   ngOnInit(): void {
     this._create_svg();
     this._drawPlot();
+    console.log(this.data())
   }
 
   private _create_svg(): void {
@@ -49,7 +51,7 @@ this._svg.append("text")
   .attr("x", 10 - this._height/2 + 30)
   .text("Weight")
     // Add X axis
-    const x = d3.scaleLinear().domain([0, 120]).range([0, this._weight]);
+    const x = d3.scaleLinear().domain([0, 200]).range([0, this._weight]);
     this._svg
       .append('g')
       .attr('transform', 'translate(0,' + this._height + ')')
@@ -63,7 +65,7 @@ this._svg.append("text")
     const dots = this._svg.append('g');
     dots
       .selectAll('dot')
-      .data(this.data)
+      .data(this.data())
       .enter()
       .append('circle')
       .attr('cx', (d: any) => x(d.age))
@@ -75,7 +77,7 @@ this._svg.append("text")
     // Add labels
     dots
       .selectAll('text')
-      .data(this.data)
+      .data(this.data())
       .enter()
       .append('text')
       .text((d: any) => d.name)

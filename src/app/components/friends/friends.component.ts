@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -51,8 +55,26 @@ export class FriendsComponent {
   }
 
   public submitForm(): void {
-    this._friendsService.friendsData = this.friendForm.value;
-    this._friendsService.friendsDataToSessionStorage = this.friendForm.value;
+    if (this._friendsService.friendsSessionStorage) {
+      this._friendsService.friendsData = {
+        ...JSON.parse(this._friendsService.friendsSessionStorage),
+        groups: [
+          ...this.friendForm.value.groups,
+          ...JSON.parse(this._friendsService.friendsSessionStorage).groups,
+        ],
+      };
+      console.log(this._friendsService.friendsData);
+      this._friendsService.friendsDataToSessionStorage = {
+        ...JSON.parse(this._friendsService.friendsSessionStorage),
+        groups: [
+          ...this.friendForm.value.groups,
+          ...JSON.parse(this._friendsService.friendsSessionStorage).groups,
+        ],
+      };
+    } else {
+      this._friendsService.friendsData = this.friendForm.value;
+      this._friendsService.friendsDataToSessionStorage = this.friendForm.value;
+    }
     this._router.navigate(['friends-display']);
   }
 
