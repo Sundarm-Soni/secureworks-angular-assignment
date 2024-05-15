@@ -1,11 +1,12 @@
 <div class="table-container">
   <h2>Friends Table</h2>
   @if(!store.loading()) {
-    <secureworks-friends-table
+  <secureworks-friends-table
     [rowData]="friendsDataTable()"
   ></secureworks-friends-table>
-  <secureworks-friend-chart [data]="friendsDataTable()"></secureworks-friend-chart>
-  } @else {
-    <mat-spinner></mat-spinner>
+  @if(friendsDT | async) {
+  <secureworks-friend-chart [data]="friendsDT"></secureworks-friend-chart>
+  } } @else {
+  <mat-spinner></mat-spinner>
   }
 </div>

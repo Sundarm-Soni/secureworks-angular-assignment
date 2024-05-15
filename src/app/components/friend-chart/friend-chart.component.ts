@@ -1,6 +1,7 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, input } from '@angular/core';
 import * as d3 from 'd3';
 import { IAgGridFriendsInterface } from '../../models/friends-form.interface';
+import { Observable, Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'secureworks-friend-chart',
@@ -9,17 +10,23 @@ import { IAgGridFriendsInterface } from '../../models/friends-form.interface';
   templateUrl: './friend-chart.component.html',
   styleUrl: './friend-chart.component.scss',
 })
-export class FriendChartComponent implements OnInit {
-  public data = input<IAgGridFriendsInterface[]>();
+export class FriendChartComponent implements OnInit, OnDestroy {
+  @Input() public data!: Observable<IAgGridFriendsInterface[] | null>;
+  private _subscription = new Subscription();
+  private _friendData!: IAgGridFriendsInterface[] | null;
   private _svg!: any;
   private _margin = 50;
   private _weight = 700 - this._margin * 2;
   private _height = 600 - this._margin * 2;
 
-  ngOnInit(): void {
-    this._create_svg();
-    this._drawPlot();
-    console.log(this.data())
+  public ngOnInit(): void {
+    this._subscription.add(
+      this.data.pipe(tap(data => {
+        this._friendData = data;
+        this._create_svg();
+        this._drawPlot();
+      })).subscribe()
+    );
   }
 
   private _create_svg(): void {
@@ -65,7 +72,7 @@ this._svg.append("text")
     const dots = this._svg.append('g');
     dots
       .selectAll('dot')
-      .data(this.data())
+      .data(this._friendData)
       .enter()
       .append('circle')
       .attr('cx', (d: any) => x(d.age))
@@ -77,11 +84,15 @@ this._svg.append("text")
     // Add labels
     dots
       .selectAll('text')
-      .data(this.data())
+      .data(this._friendData)
       .enter()
       .append('text')
       .text((d: any) => d.name)
       .attr('x', (d: any) => x(d.age))
       .attr('y', (d: any) => y(d.weight));
+  }
+
+  public ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

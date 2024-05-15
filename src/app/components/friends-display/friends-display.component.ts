@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FriendsStore } from '../../store/friends.store';
-import { JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { FriendsTableComponent } from '../friends-table/friends-table.component';
 import {
   IAgGridFriendsInterface,
@@ -15,6 +15,8 @@ import {
 } from '../../models/friends-form.interface';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FriendChartComponent } from '../friend-chart/friend-chart.component';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -23,7 +25,8 @@ import { FriendChartComponent } from '../friend-chart/friend-chart.component';
     JsonPipe,
     FriendsTableComponent,
     MatProgressSpinnerModule,
-    FriendChartComponent
+    FriendChartComponent,
+    AsyncPipe
   ],
   selector: 'secureworks-friends-display',
   templateUrl: './friends-display.component.html',
@@ -33,23 +36,26 @@ import { FriendChartComponent } from '../friend-chart/friend-chart.component';
 export class FriendsDisplayComponent implements OnInit {
   public store = inject(FriendsStore);
   public friendsDataTable = signal<IAgGridFriendsInterface[]>([]);
+  public friendsDT: Observable<IAgGridFriendsInterface[]> = toObservable(this.friendsDataTable);
   private _prevVal!: string;
   private _currVal!: string;
+
+  constructor() {}
 
   public ngOnInit(): void {
     this.loadFriends().then(() => {
       if (this.store.allfriends()) {
-        this.transformData(this.store.allfriends());
+        this._transformData(this.store.allfriends());
       }
     });
   }
 
-  public transformData(data: IFriendsGroupData): void {
+  private _transformData(data: IFriendsGroupData): void {
     for (let value of Object.values(data)) {
       if (Array.isArray(value)) {
         this._currVal = this._prevVal;
         for (let val of value) {
-          this.transformData(val);
+          this._transformData(val);
         }
       } else {
         this.friendsDataTable.update((values: IAgGridFriendsInterface[]) => {
