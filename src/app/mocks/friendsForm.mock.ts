@@ -1,4 +1,4 @@
-const groupsMock = {
+export const groupsMock = {
   groups: [
     {
       friends: {
@@ -40,6 +40,54 @@ const groupsMock = {
           friends: {
             name: 'Monika',
             id: 989,
+            age: 25,
+            weight: 30,
+          },
+          groups: [],
+        },
+      ],
+    },
+  ]
+};
+
+
+export const groupsFormsMock = {
+  groups: [
+    {
+      friends: {
+        name: 'Monika',
+        age: 25,
+        weight: 30,
+      },
+      groups: [
+        {
+          friends: {
+            name: 'Monika',
+            age: 25,
+            weight: 30,
+          },
+          groups: [],
+        },
+      ],
+    },
+    {
+      friends: {
+        name: 'Monika',
+        age: 25,
+        weight: 30,
+      },
+      groups: [
+        {
+          friends: {
+            name: 'Monika',
+            age: 25,
+            weight: 30,
+          },
+          groups: [],
+        },
+        {
+          friends: {
+            name: 'Monika',
             age: 25,
             weight: 30,
           },
